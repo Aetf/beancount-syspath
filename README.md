@@ -17,22 +17,19 @@ pip install beancount-syspath
 Prepend list of paths
 
 ```beancount
-plugin "beancount_syspath.prepend" "[
-    'some/dir',
-    'other/dir'
-]"
+plugin "beancount_syspath.plugin" "{
+    'append': ['some/dir', 'other/dir'],
+    'prepend': ['some/dir', 'other/dir'],
+}"
 ```
 
-or append list of paths
+Note: Place the directive before other plugin loading ones, so they can make use of the updated `sys.path`.
 
-```beancount
-plugin "beancount_syspath.append" "[
-    'some/dir',
-    'other/dir'
-]"
-```
+### Configuration
+The config value is a python dict literal, contains the following keys
 
-Place the directive before other plugin loading ones, so they can make use of the updated `sys.path`.
-
-The config value is a python list literal, which will be evaluated by `ast.literal_eval`, and then
-prepended/appended to `sys.path`.
+| Key | Type | Optional | Default | Meaning |
+|:-:|:-:|:-:|:-:|:-:|
+| `append` | `List[str]` | yes | `[]` | Append the list of path to `sys.path` |
+| `prepend` | `List[str]` | yes | `[]` | Prepend the list of path to `sys.path` |
+| `normalize_to_root` | `bool` | yes | `True` | If the path is relative, it is considered to be relative to the root beancount file, and normalized to absolute path before adding to `sys.path`. |

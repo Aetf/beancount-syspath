@@ -21,18 +21,11 @@ Beancount Plugin
 
 Append configured paths to sys.path
 '''
-import sys
-import ast
-
-__author__ = 'Aetf <aetf@unlimited-code.works>'
+from .plugin import run_legacy
 
 __plugins__ = ['append']
 
-def append(entries, options_map, config):
-    '''Append paths to sys.path'''
-    paths = ast.literal_eval(config)
-    if not isinstance(paths, list):
-        raise ValueError('Invalid plugin configuration: should be a single list.')
 
-    sys.path.extend(paths)
-    return entries, []
+def append(entries, options_map, config):
+    '''Prepend paths to sys.path'''
+    return run_legacy('append', entries, options_map, config)

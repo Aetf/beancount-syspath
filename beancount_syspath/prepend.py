@@ -21,18 +21,11 @@ Beancount Plugin
 
 Prepend configured paths to sys.path
 '''
-import sys
-import ast
-
-__author__ = 'Aetf <aetf@unlimited-code.works>'
+from .plugin import run_legacy
 
 __plugins__ = ['prepend']
 
+
 def prepend(entries, options_map, config):
     '''Prepend paths to sys.path'''
-    paths = ast.literal_eval(config)
-    if not isinstance(paths, list):
-        raise ValueError('Invalid plugin configuration: should be a single list.')
-
-    sys.path[0:0] = paths
-    return entries, []
+    return run_legacy('prepend', entries, options_map, config)
