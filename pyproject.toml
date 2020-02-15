@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "beancount-syspath"
-version = "0.2.0"
+version = "0.2.1"
 description = "Manipulate sys.path within the beancount file"
 authors = ["Aetf <aetf@unlimited-code.works>"]
 license = "MIT"
